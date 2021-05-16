@@ -1,0 +1,687 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>STAT 630 Group 3 | CKD Risk Tool</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-10">
+                <div class="col-sm">
+                    <div class="card mb-3">
+                        <h1 style="text-align: center;">STAT 630 Group 3</h1>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="card mb-3">
+                        <div class="card-body ">
+                            <div class="alert alert-primary">
+                                Check your risk for Chronic Kidney Disease (CKD)
+                            </div>
+
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-sm">
+                                    <div class="card border-0">
+                                        <div class="card-body">
+
+                                            <form class="was-validated">
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputAge" class="form-label">How old you?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check">
+                                                        <!-- <input type="number" class="form-control is-invalid" id="inputAge"
+                                            placeholder="Age" required></textarea> -->
+
+                                                        <select class="form-select" id="inputAge"
+                                                            onchange="updateChart('inputAge')" required
+                                                            aria-label="Select an age range">
+                                                            <option value="">Age</option>
+                                                            <option value="5">20 - 49</option>
+                                                            <option value="10">50 - 59</option>
+                                                            <option value="15">60 - 69</option>
+                                                            <option value="20">70+</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputSex" class="form-label">Sex?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check" onchange="updateChart('inputSex')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inputSex"
+                                                                id="inputSexFemale" value="10" required>
+                                                            <label class="form-check-label"
+                                                                for="inputSexFemale">Female</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="inputSex"
+                                                                id="inputSexMale" value="5" required>
+                                                            <label class="form-check-label"
+                                                                for="inputSexMale">Male</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputRace" class="form-label">Caucasian?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check" onchange="updateChart('inputRace')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputRaceY"
+                                                                name="inputRace" value="5" required>
+                                                            <label class="form-check-label" for="inputRaceY">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputRaceN"
+                                                                name="inputRace" value="10" required>
+                                                            <label class="form-check-label" for="inputRaceN">No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputHdl" class="form-label">HDL (Good) Cholesterol
+                                                            (mg/dL)?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check" onchange="updateChart('inputHdl')">
+                                                        <div class="form-check">
+                                                            <input type="radio" class="form-check-input" id="inputHdlH"
+                                                                name="inputHdl" value="0" required>
+                                                            <label class="form-check-label" for="inputHdlY">(Optimal) >
+                                                                60</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="radio" class="form-check-input" id="inputHdlM"
+                                                                name="inputHdl" value="10" required>
+                                                            <label class="form-check-label" for="inputHdlN">(Normal) 40
+                                                                –
+                                                                60</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="radio" class="form-check-input" id="inputHdlL"
+                                                                name="inputHdl" value="15" required>
+                                                            <label class="form-check-label" for="inputHdlN">(At Risk) <
+                                                                    40</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputAnemia" class="form-label">Anemia?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check"
+                                                        onchange="updateChart('inputAnemia')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="inputAnemiaY" name="inputAnemia" value="5" required>
+                                                            <label class="form-check-label"
+                                                                for="inputAnemiaY">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="inputAnemiaN" name="inputAnemia" value="0" required>
+                                                            <label class="form-check-label"
+                                                                for="inputAnemiaN">No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputHypertension"
+                                                            class="form-label">Hypertension?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check"
+                                                        onchange="updateChart('inputHypertension')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="inputHypertensionY" name="inputHypertension"
+                                                                value="10" required>
+                                                            <label class="form-check-label"
+                                                                for="inputHypertensionY">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="inputHypertensionN" name="inputHypertension"
+                                                                value="0" required>
+                                                            <label class="form-check-label"
+                                                                for="inputHypertensionN">No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputDiabetes" class="form-label">Diabetes?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check"
+                                                        onchange="updateChart('inputDiabetes')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="inputDiabetesY" name="inputDiabetes" value="10"
+                                                                required>
+                                                            <label class="form-check-label"
+                                                                for="inputDiabetesY">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input"
+                                                                id="inputDiabetesN" name="inputDiabetes" value="0"
+                                                                required>
+                                                            <label class="form-check-label"
+                                                                for="inputDiabetesN">No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputChf" class="form-label">Congestive heart
+                                                            failure (CHF)?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check" onchange="updateChart('inputChf')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputChfY"
+                                                                name="inputChf" value="5" required>
+                                                            <label class="form-check-label" for="inputChfY">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputChfN"
+                                                                name="inputChf" value="0" required>
+                                                            <label class=" form-check-label" for="inputChfN">No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputPvd" class="form-label">Peripheral vascular
+                                                            disease (PVD)?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check" onchange="updateChart('inputPvd')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputPvdY"
+                                                                name="inputPvd" value="5" required>
+                                                            <label class="form-check-label" for="inputPvdY">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputPvdN"
+                                                                name="inputPvd" value="0" required>
+                                                            <label class="form-check-label" for="inputPvdN">No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-7">
+                                                        <label for="inputCvd" class="form-label">Angina pectoris,
+                                                            myocardial infarction, stroke, or other cardiovascular
+                                                            disease (CVD)?</label>
+                                                    </div>
+                                                    <div class="col-sm form-check" onchange="updateChart('inputCvd')">
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputCvdY"
+                                                                name="inputCvd" value="10" required>
+                                                            <label class="form-check-label" for="inputCvdY">Yes</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input type="radio" class="form-check-input" id="inputCvdN"
+                                                                name="inputCvd" value="0" required>
+                                                            <label class="form-check-label" for="inputCvdN">No</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm">
+                                    <div class="card-body align-items-center d-flex justify-content-center">
+                                        <h3>Your points towards CKD risk is <span id="percentRisk"></span>.</h3>
+                                    </div>
+
+                                    <div id="percentRiskMsgWarn" style="display:none;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                                            <symbol id="exclamation-triangle-fill" fill="currentColor"
+                                                viewBox="0 0 16 16">
+                                                <path
+                                                    d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                            </symbol>
+                                        </svg>
+
+                                        <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img"
+                                                aria-label="Warning:">
+                                                <use xlink:href="#exclamation-triangle-fill" />
+                                            </svg>
+                                            <p><b>Alert</b> - You are likely at high risk, please speak with a provider about your risk and consider getting screened!`</p>;
+                                        </div>
+                                    </div>
+
+                                    <div id="percentRiskMsgInfo" style="display:none;">
+                                        <div class="card border-light mb-3">
+                                            <div class="card-body">
+                                              <p class="card-text">You are likely low risk! While there was nothing concerning in your responses, check out ways to reduce your risk for CKD.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="container-fluid">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-md-10">
+                                                <div class="card border-0">
+                                                    <canvas id="doughnutChart" class="my-3"></canvas>
+                                                    <!-- <canvas id="barChart" class="my-3"></canvas> -->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-primary my-3">
+                            <h2>About Chronic Kidney Disease (CKD)</h2>
+                            <p><b>What is CKD?</b></p>
+                            <p>CKD means your kidneys are damaged and cannot filter blood the way they should. The
+                                kidneys&rsquo; main job is to filter extra water and wastes out of your blood to make
+                                urine. Your kidneys also make hormones that help control blood pressure, make red blood
+                                cells, and keep your bones strong. The disease is called &ldquo;chronic&rdquo; because
+                                the damage to your kidneys happens slowly over a long period of time. This damage can
+                                cause wastes to build up in your body. CKD can also cause other health problems and may
+                                lead to kidney failure. If your kidneys fail, you will need dialysis or a kidney
+                                transplant to maintain your health. The sooner you know you have kidney disease, the
+                                sooner you can make changes to protect your kidneys.</p>
+
+                            <p><b>What are major risk factors or causes of CKD?</b></p>
+                            <p>You are at risk for kidney disease if you have:</p>
+                            <ul style="list-style-type: disc;">
+                                <li>Diabetes</li>
+                                <li>High blood pressure</li>
+                                <li>Heart disease</li>
+                                <li>Family history of kidney failure</li>
+                            </ul>
+                            <p>Your chances of having kidney disease increase with age. The longer you have had
+                                diabetes, high blood pressure, or heart disease, the more likely that you will have
+                                kidney disease.</p>
+
+                            <p>African Americans, Hispanics, and American Indians tend to have a greater risk for CKD
+                                due mostly to higher rates of diabetes and high blood pressure.</p>
+
+                            <p><b>What are the symptoms of CKD?</b></p>
+                            <p>Early CKD may not have any symptoms. You may wonder how you can have CKD and feel fine.
+                                For many people, the only way to know if you have kidney disease is to get your kidneys
+                                checked with blood and urine tests.</p>
+
+                            <p>As kidney disease gets worse, a person may have swelling, called edema. Edema happens
+                                when the kidneys cannot get rid of extra fluid and salt. It can occur in the legs, feet,
+                                or ankles, and less often in the hands or face. People with CKD can also develop anemia,
+                                bone disease, and malnutrition.</p>
+
+                            <p>Symptoms of advanced CKD include:</p>
+                            <ul style="list-style-type: disc;">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <li>chest pain</li>
+                                        <li>dry skin</li>
+                                        <li>itching or numbness</li>
+                                        <li>feeling tired</li>
+                                        <li>headaches</li>
+                                        <li>increased or decreased urination</li>
+                                        <li>loss of appetite</li>
+                                    </div>
+                                    <div class="col-sm">
+                                        <li>muscle cramps</li>
+                                        <li>nausea</li>
+                                        <li>shortness of breath</li>
+                                        <li>sleep problems</li>
+                                        <li>trouble concentrating</li>
+                                        <li>vomiting</li>
+                                        <li>weight loss</li>
+                                    </div>
+                                </div>
+                            </ul>
+                            <p><b>How can you lower your risk?</b></p>
+                            <ul style="list-style-type: disc;">
+                                <li>Make healthy food choices, consider speaking with a dietitian</li>
+                                <li>Make physical activity part of your routine</li>
+                                <li>Aim for a healthy weight</li>
+                                <li>Get enough sleep</li>
+                                <li>Stop smoking</li>
+                                <li>Limit alcohol intake NIH external link</li>
+                                <li>Explore stress-reducing activities</li>
+                                <li>Manage diabetes, high blood pressure, and heart disease</li>
+                                <li>Ask your health care provider questions</li>
+                            </ul>
+                            <p>During your next medical visit, you may want to ask your health care provider about your
+                                kidney health. Your health care provider will help decide how often you should be
+                                tested.&nbsp;</p>
+                            <p><b>Want more resources?</b></p>
+                            <p><a
+                                    href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/">https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/</a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-dark my-3">
+                    <b>Disclaimer:</b> The information is for educational purposes only and is not intended to be a
+                    substitute for
+                    professional medical advice, diagnosis, or treatment.
+                    Always seek the advice of your physician or other qualified health provider with any questions you
+                    may
+                    have
+                    regarding a medical condition. The developer varyusworks and STAT 630 Group 3 makes no
+                    representation
+                    and
+                    assumes no
+                    responsibility for the accuracy of information contained on or available on this document or through
+                    its
+                    web site,
+                    and such information is subject to change without notice.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        var valAge = 0;
+        var valSex = 0;
+        var valRace = 0;
+        var valHdl = 0;
+        var valAnemia = 0;
+        var valHypertension = 0;
+        var valDiabetes = 0;
+        var valChf = 0;
+        var valPvd = 0;
+        var valCvd = 0;
+
+        var valRisk = parseInt(valAge) + parseInt(valSex) + parseInt(valRace) + parseInt(valHdl) + parseInt(valAnemia) + parseInt(valHypertension) + parseInt(valDiabetes) + parseInt(valChf) + parseInt(valPvd) + parseInt(valCvd);
+        var valNoRisk = parseInt(100) - parseInt(valRisk);
+
+        var dataBar = {
+            labels: 'Risk',
+            datasets: [
+                {
+                    label: 'Age',
+                    data: valAge,
+                    backgroundColor: 'red',
+                },
+                {
+                    label: 'Sex',
+                    data: valSex,
+                    backgroundColor: 'blue',
+                },
+                {
+                    label: 'Race',
+                    data: valSex,
+                    backgroundColor: 'purple',
+                },
+                {
+                    label: 'HDL',
+                    data: valHdl,
+                    backgroundColor: 'green',
+                },
+                {
+                    label: 'Anemia',
+                    data: valAnemia,
+                    backgroundColor: 'yellow',
+                },
+                {
+                    label: 'Hypertension',
+                    data: valHypertension,
+                    backgroundColor: 'brown',
+                },
+                {
+                    label: 'Diabetes',
+                    data: valDiabetes,
+                    backgroundColor: 'pink',
+                },
+                {
+                    label: 'CHF',
+                    data: valChf,
+                    backgroundColor: 'orange',
+                },
+                {
+                    label: 'PVD',
+                    data: valPvd,
+                    backgroundColor: 'purple',
+                },
+                {
+                    label: 'CVD',
+                    data: valCvd,
+                    backgroundColor: 'pink',
+                },
+                {
+                    data: valNoRisk,
+                    backgroundColor: 'grey',
+                }
+            ]
+        };
+        // var ctxBar = document.getElementById('barChart');
+        // var chartBar = new Chart(ctxBar, {
+        //     type: 'bar',
+        //     data: dataBar,
+        //     options: {
+        //         scales: {
+        //             x: {
+        //                 stacked: true
+        //             },
+        //             y: {
+        //                 stacked: true
+        //             }
+        //         },
+        //         plugins: {
+        //             legend: {
+        //                 display: false
+        //             }
+        //         },
+        //         scales: {
+        //             y: {
+        //                 beginAtZero: true
+        //             }
+        //         }
+        //     }
+        // });
+
+        var ctxDo = document.getElementById('doughnutChart');
+        var chartDo = new Chart(ctxDo, {
+            type: 'doughnut',
+            data: {
+                labels: ['Age', 'Sex', 'Race', 'HDL', 'Anemia', 'Hypertension', 'Diabetes', ' CHF', 'PVD', 'CVD', ''],
+                datasets: [{
+                    label: 'Probability of having CKD (expressed as a percentage between 0% and 100%):',
+                    data: [
+                        valAge,
+                        valSex,
+                        valRace,
+                        valHdl,
+                        valAnemia,
+                        valHypertension,
+                        valDiabetes,
+                        valChf,
+                        valPvd,
+                        valCvd,
+                        valNoRisk
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)', // Age
+                        'rgba(54, 162, 235, 0.2)', // Sex
+                        'rgba(255, 206, 86, 0.2)', // Race
+                        'rgba(75, 192, 192, 0.2)', // HDL
+                        'rgba(153, 52, 255, 0.2)', // Anemia
+                        'rgba(100, 102, 55, 0.2)', // Hypertension
+                        'rgba(153, 102, 55, 0.2)',  // Diabetes
+                        'rgba(53, 102, 255, 0.2)', // CHF
+                        'rgba(153, 12, 55, 0.2)', // PVD
+                        'rgba(13, 12, 255, 0.2)', // CVD
+                        'grey' // Blank
+                    ],
+                    borderColor: ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        document.getElementById('percentRisk').innerHTML = valRisk;
+
+        function getSelectedValue(riskFactor) {
+            const rbs = document.querySelectorAll(`input[name=${riskFactor}]`);
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            return selectedValue;
+        };
+
+        function updateChart(riskFactor) {
+            if (riskFactor === "inputAge") {
+                selAge = document.getElementById("inputAge");
+                valAge = selAge.options[selAge.selectedIndex].value;
+            }
+
+            if (riskFactor === "inputSex") {
+                valSex = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputRace") {
+                valRace = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputHdl") {
+                valHdl = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputAnemia") {
+                valAnemia = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputHypertension") {
+                valHypertension = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputDiabetes") {
+                valDiabetes = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputChf") {
+                valChf = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputPvd") {
+                valPvd = getSelectedValue(riskFactor)
+            }
+
+            if (riskFactor === "inputCvd") {
+                valCvd = getSelectedValue(riskFactor)
+            }
+
+            valRisk = parseInt(valAge) + parseInt(valSex) + parseInt(valRace) + parseInt(valHdl) + parseInt(valAnemia) + parseInt(valHypertension) + parseInt(valDiabetes) + parseInt(valChf) + parseInt(valPvd) + parseInt(valCvd);
+            valNoRisk = parseInt(100) - parseInt(valRisk);
+
+            document.getElementById('percentRisk').innerHTML = valRisk;
+
+            if (parseInt(valRisk) >= 50) {
+                document.getElementById("percentRiskMsgInfo").style.display = "none";
+                document.getElementById("percentRiskMsgWarn").style.display = "inline";
+            }
+
+            if (parseInt(valRisk) < 50) {
+                document.getElementById("percentRiskMsgWarn").style.display = "none";
+                document.getElementById("percentRiskMsgInfo").style.display = "inline";
+            }
+
+            var updateValuesDo = [
+                valAge,
+                valSex,
+                valRace,
+                valHdl,
+                valAnemia,
+                valHypertension,
+                valDiabetes,
+                valChf,
+                valPvd,
+                valCvd,
+                valNoRisk];
+
+            chartDo.data.datasets[0].data = updateValuesDo;
+            chartDo.update();
+
+
+            var updateValuesBar = [
+                {
+                    data: valAge,
+                },
+                {
+                    data: valSex,
+                },
+                {
+                    data: valHdl,
+                },
+                {
+                    data: valAnemia,
+                },
+                {
+                    data: valHypertension,
+                },
+                {
+                    data: valDiabetes,
+                },
+                {
+                    data: valChf,
+                },
+                {
+                    data: valPvd,
+                },
+                {
+                    data: valCvd,
+                },
+                {
+                    data: valRace,
+                }
+            ];
+            // alert(valAge)
+            // chartBar.data.datasets[0].data = updateValuesBar;
+            // chartBar.update();
+
+        };
+    </script>
+</body>
+
+</html>
