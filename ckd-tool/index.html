@@ -270,14 +270,17 @@
                                                 aria-label="Warning:">
                                                 <use xlink:href="#exclamation-triangle-fill" />
                                             </svg>
-                                            <p><b>Alert</b> - You are likely at risk, please speak with a provider about your risk and consider getting screened!`</p>;
+                                            <p><b>Alert</b> - You are likely at risk, please speak with a provider about
+                                                your risk and consider getting screened!</p>
                                         </div>
                                     </div>
 
                                     <div id="percentRiskMsgInfo" style="display:none;">
                                         <div class="card border-light mb-3">
                                             <div class="card-body">
-                                              <p class="card-text">You are likely low risk! While there was nothing concerning in your responses, check out ways to reduce your risk for CKD.</p>
+                                                <p class="card-text">You are likely low risk! While there was nothing
+                                                    concerning in your responses, check out ways to reduce your risk for
+                                                    CKD.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -374,7 +377,7 @@
                             <p>During your next medical visit, you may want to ask your health care provider about your
                                 kidney health. Your health care provider will help decide how often you should be
                                 tested.&nbsp;</p>
-                            <p><b>Want to learn more?</b></p>
+                            <p><b>Want more resources?</b></p>
                             <p><a
                                     href="https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/">https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd/</a>
                             </p>
@@ -390,7 +393,7 @@
                     Always seek the advice of your physician or other qualified health provider with any questions you
                     may
                     have
-                    regarding a medical condition. The developer, varyusworks, and STAT 630 Group 3 makes no
+                    regarding a medical condition. The developer varyusworks and STAT 630 Group 3 makes no
                     representation
                     and
                     assumes no
@@ -424,123 +427,38 @@
         var valRisk = parseInt(valAge) + parseInt(valSex) + parseInt(valRace) + parseInt(valHdl) + parseInt(valAnemia) + parseInt(valHypertension) + parseInt(valDiabetes) + parseInt(valChf) + parseInt(valPvd) + parseInt(valCvd);
         var valNoRisk = parseInt(100) - parseInt(valRisk);
 
-        var dataBar = {
-            labels: 'Risk',
-            datasets: [
-                {
-                    label: 'Age',
-                    data: valAge,
-                    backgroundColor: 'red',
-                },
-                {
-                    label: 'Sex',
-                    data: valSex,
-                    backgroundColor: 'blue',
-                },
-                {
-                    label: 'Race',
-                    data: valSex,
-                    backgroundColor: 'purple',
-                },
-                {
-                    label: 'HDL',
-                    data: valHdl,
-                    backgroundColor: 'green',
-                },
-                {
-                    label: 'Anemia',
-                    data: valAnemia,
-                    backgroundColor: 'yellow',
-                },
-                {
-                    label: 'Hypertension',
-                    data: valHypertension,
-                    backgroundColor: 'brown',
-                },
-                {
-                    label: 'Diabetes',
-                    data: valDiabetes,
-                    backgroundColor: 'pink',
-                },
-                {
-                    label: 'CHF',
-                    data: valChf,
-                    backgroundColor: 'orange',
-                },
-                {
-                    label: 'PVD',
-                    data: valPvd,
-                    backgroundColor: 'purple',
-                },
-                {
-                    label: 'CVD',
-                    data: valCvd,
-                    backgroundColor: 'pink',
-                },
-                {
-                    data: valNoRisk,
-                    backgroundColor: 'grey',
-                }
-            ]
-        };
-        // var ctxBar = document.getElementById('barChart');
-        // var chartBar = new Chart(ctxBar, {
-        //     type: 'bar',
-        //     data: dataBar,
-        //     options: {
-        //         scales: {
-        //             x: {
-        //                 stacked: true
-        //             },
-        //             y: {
-        //                 stacked: true
-        //             }
-        //         },
-        //         plugins: {
-        //             legend: {
-        //                 display: false
-        //             }
-        //         },
-        //         scales: {
-        //             y: {
-        //                 beginAtZero: true
-        //             }
-        //         }
-        //     }
-        // });
-
         var ctxDo = document.getElementById('doughnutChart');
         var chartDo = new Chart(ctxDo, {
             type: 'doughnut',
             data: {
-                labels: ['Age', 'Sex', 'Race', 'HDL', 'Anemia', 'Hypertension', 'Diabetes', ' CHF', 'PVD', 'CVD', ''],
+                labels: ['Age', 'HDL', 'Sex', 'Race', 'Hypertension', 'Diabetes', 'CVD', 'Anemia', 'CHF', 'PVD', ''],
                 datasets: [{
                     label: 'Probability of having CKD (expressed as a percentage between 0% and 100%):',
                     data: [
-                        valAge,
-                        valSex,
+                        valAge, //20
+                        valHdl, //15
+                        valSex, //10
                         valRace,
-                        valHdl,
-                        valAnemia,
                         valHypertension,
                         valDiabetes,
+                        valCvd,
+                        valAnemia, //5
                         valChf,
                         valPvd,
-                        valCvd,
                         valNoRisk
                     ],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)', // Age
-                        'rgba(54, 162, 235, 0.2)', // Sex
-                        'rgba(255, 206, 86, 0.2)', // Race
-                        'rgba(75, 192, 192, 0.2)', // HDL
-                        'rgba(153, 52, 255, 0.2)', // Anemia
-                        'rgba(100, 102, 55, 0.2)', // Hypertension
-                        'rgba(153, 102, 55, 0.2)',  // Diabetes
-                        'rgba(53, 102, 255, 0.2)', // CHF
-                        'rgba(153, 12, 55, 0.2)', // PVD
-                        'rgba(13, 12, 255, 0.2)', // CVD
-                        'grey' // Blank
+                        '#004d4d', //20
+                        '#00695c', //15
+                        '#00796b', //10
+                        '#00897b',
+                        '#009688',
+                        '#26a69a',
+                        '#4db6ac',
+                        '#80cbc4', //5
+                        '#b2dfdb',
+                        '#e0f2f1',
+                        'gray' // Blank
                     ],
                     borderColor: ['black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black', 'black'
                     ],
@@ -628,58 +546,21 @@
             }
 
             var updateValuesDo = [
-                valAge,
-                valSex,
+                valAge, //20
+                valHdl, //15
+                valSex, //10
                 valRace,
-                valHdl,
-                valAnemia,
                 valHypertension,
                 valDiabetes,
+                valCvd,
+                valAnemia, //5
                 valChf,
                 valPvd,
-                valCvd,
-                valNoRisk];
+                valNoRisk
+            ];
 
             chartDo.data.datasets[0].data = updateValuesDo;
             chartDo.update();
-
-
-            var updateValuesBar = [
-                {
-                    data: valAge,
-                },
-                {
-                    data: valSex,
-                },
-                {
-                    data: valHdl,
-                },
-                {
-                    data: valAnemia,
-                },
-                {
-                    data: valHypertension,
-                },
-                {
-                    data: valDiabetes,
-                },
-                {
-                    data: valChf,
-                },
-                {
-                    data: valPvd,
-                },
-                {
-                    data: valCvd,
-                },
-                {
-                    data: valRace,
-                }
-            ];
-            // alert(valAge)
-            // chartBar.data.datasets[0].data = updateValuesBar;
-            // chartBar.update();
-
         };
     </script>
 </body>
